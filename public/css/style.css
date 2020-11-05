@@ -1,0 +1,50 @@
+header {
+  background-color: #00506c;
+}
+
+a.nav-link {
+  color: #90ceeb;
+}
+
+.active-sub {
+  font-weight: bold;
+}
+
+#wrapper {
+  width: 100%;
+  background-color: #00506c;
+}
+
+.fixed {
+  position: fixed;
+  z-index: 1;
+}
+
+@media (max-width: 992px) {
+  img#logo {
+    width: 100px;
+  }
+
+  .navbar-toggler {
+    width: 50px;
+  }
+
+  .navbar-toggler-icon {
+    width: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  img#logo {
+    width: 200px;
+  }
+
+  .navbar-toggler {
+    width: 50px;
+  }
+
+  .navbar-toggler-icon {
+    width: 20px;
+  }
+}
+
