@@ -1,6 +1,6 @@
 @extends('theme.category')
 @section('menu')
-<div class="col-sm-7">
+<div class="col-sm-7 pl-0">
   <h4>
     @if (isset($mainSubcategory))
     {{$mainSubcategory->name}}
@@ -43,14 +43,14 @@
   @endif
 </div>
 
-<div class="col-sm">
+<div class="col-sm pl-5">
   @foreach ($sub_categories as $s)
   <div class="row">
-    <div class="col-sm border-top border-primary">
+    <div class="col-sm border-top border-primary border-3">
       <p class="text-uppercase font-weight-bold text-primary mt-3">
         {{$s->name}}
       </p>
-      <ul>
+      <ul class="pl-2">
         @foreach ($posts as $p)
         @php
         $subCategory = App\Category::where('id', $p->category_id)->first();
