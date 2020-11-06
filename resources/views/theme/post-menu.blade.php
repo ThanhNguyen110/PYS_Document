@@ -1,6 +1,6 @@
 @extends('theme.category')
 @section('menu')
-<div class="col-sm-7 pl-0">
+<div class="col-sm-7">
   <h4>
     @if (isset($mainSubcategory))
     {{$mainSubcategory->name}}

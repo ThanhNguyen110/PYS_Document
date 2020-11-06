@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-2 mb-5 pr-0">
+  <div class="col-sm-2 mb-5">
     <h4 class="text-primary mb-5">
       {{$main_category->name}}
     </h4>
