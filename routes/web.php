@@ -18,7 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('doc', 'CategoryController@list');
-Route::get('doc/search', 'SearchController@list');
+Route::get('doc/search/list', 'SearchController@list');
+Route::get('doc/search/result', 'SearchController@result');
 Route::get('doc/{main_slug}/{sub_slug?}/{post_slug?}', 'PostController@list');
 
 Route::prefix('admin')->group(function () {

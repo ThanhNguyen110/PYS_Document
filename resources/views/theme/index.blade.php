@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
     crossorigin="anonymous" />
-  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
       <div class="row pt-3 pb-3">
 
         <div class="col-6 col-sm-5 m-auto">
-          <a href="{{url('/')}}">
+          <a href="{{ url('/') }}">
             <img src="https://pystravel.vn/image/logo-2.png" id="logo">
           </a>
         </div>
@@ -63,22 +63,22 @@
       </div>
     </div>
   </div>
-
   <header>
     <div class="container">
       <div class="row pt-5 pb-5" id="nav">
         <div class="col-sm-6 offset-sm-3">
-          <form action="{{url("doc/search")}}" method="GET" autocomplete="off">
+          <form action="{{ url('doc/search/result') }}" method="GET" autocomplete="off">
             <div class="input-group">
               <div class="input-group-prepend">
                 <button type="submit" class="input-group-text form-control">
                   <i class="fas fa-search"></i>
                 </button>
               </div>
-              <input type="search" name="search" class="form-control" id="inlineFormInputGroup"
+              <input type="search" name="search" class="form-control" id="search"
                 placeholder="Chúng tôi có thể giúp bạn như thế nào?">
             </div>
           </form>
+          <div id="searchList"></div>
         </div>
       </div>
       <div class="row">
@@ -86,10 +86,10 @@
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
               @foreach ($categories as $c)
-              <a class="nav-link {{ Request::is("*{$c->slug}*") ? 'active' : '' }}" id="nav-tab"
-                href="{{url("doc/{$c->slug}")}}" role="tab" aria-controls="nav" aria-selected="false">
-                {{$c->name}}
-              </a>
+                <a class="nav-link {{ Request::is("*{$c->slug}*") ? 'active' : '' }}" id="nav-tab"
+                  href="{{ url("doc/{$c->slug}") }}" role="tab" aria-controls="nav" aria-selected="false">
+                  {{ $c->name }}
+                </a>
               @endforeach
             </div>
           </nav>
@@ -107,12 +107,40 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
   integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+  crossorigin="anonymous">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
   integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
   integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
 </script>
-<script src="{{asset('js/style.js')}}"></script>
+<script src="{{ asset('js/style.js') }}"></script>
+<script>
+  $(function() {
+    $('#search').on('keyup', function() {
+      var query = $(this).val();
+      $.ajax({
+        url: '{{ url('doc/search/list') }}',
+        type: "GET",
+        data: {
+          'search': query
+        },
+        success: function(data) {
+          $('#searchList').html(data);
+        }
+      })
+    });
+
+    $(document).on('click', 'li', function() {
+      var value = $(this).text();
+      $('#search').val(value);
+      $('#searchList').html("");
+    });
+  });
+
+</script>
 
 </html>
