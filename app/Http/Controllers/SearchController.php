@@ -20,9 +20,13 @@ class SearchController extends Controller
       if (count($posts) > 0) {
         $output = "<ul class='list-group d-block position-absolute'>";
         foreach ($posts as $p) {
+          $subCategory = Category::where('id', $p->category_id)->first();
+          $mainCategory = Category::where('id', $subCategory->parent_id)->first();
           $output .=
-            "<li class='list-group-item'>"
-            . $p->title .
+            "<li class='list-group-item'>" .
+            "<a href=" . url("doc/{$mainCategory->slug}/{$subCategory->slug}/{$p->slug}") . ">" .
+            $p->title .
+            "</a>" .
             "</li>";
         }
         $output .= '</ul>';
