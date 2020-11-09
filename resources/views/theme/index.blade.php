@@ -134,20 +134,6 @@
       })
     });
 
-    /* $("#search").on("focusout", function() {
-      var query = $(this).val();
-      var xhr = $.ajax({
-        url: "{{ url('doc/search/list') }}",
-        type: "GET",
-        data: {
-          "search": query
-        },
-        success: function(data) {
-          $("#searchList").html(data);
-        }
-      })
-    }); */
-
     /* $(document).on('click', 'li', function() {
       var value = $(this).text();
       $("#search").val(value);
