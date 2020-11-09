@@ -120,25 +120,39 @@
 <script src="{{ asset('js/style.js') }}"></script>
 <script>
   $(function() {
-    $('#search').on('keyup', function() {
+    $("#search").on("keyup", function() {
       var query = $(this).val();
-      $.ajax({
-        url: '{{ url('doc/search/list') }}',
+      var xhr = $.ajax({
+        url: "{{ url('doc/search/list') }}",
         type: "GET",
         data: {
-          'search': query
+          "search": query
         },
         success: function(data) {
-          $('#searchList').html(data);
+          $("#searchList").html(data);
         }
       })
     });
 
-    $(document).on('click', 'li', function() {
+    /* $("#search").on("focusout", function() {
+      var query = $(this).val();
+      var xhr = $.ajax({
+        url: "{{ url('doc/search/list') }}",
+        type: "GET",
+        data: {
+          "search": query
+        },
+        success: function(data) {
+          $("#searchList").html(data);
+        }
+      })
+    }); */
+
+    /* $(document).on('click', 'li', function() {
       var value = $(this).text();
-      $('#search').val(value);
-      $('#searchList').html("");
-    });
+      $("#search").val(value);
+      $("#searchList").html("");
+    }); */
   });
 
 </script>

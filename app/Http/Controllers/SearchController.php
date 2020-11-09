@@ -17,7 +17,7 @@ class SearchController extends Controller
       ->get();
 
     if ($request->ajax()) {
-      if (count($posts) > 0) {
+      if (count($posts) > 0 && $keyword != null) {
         $output = "<ul class='list-group d-block position-absolute'>";
         foreach ($posts as $p) {
           $subCategory = Category::where('id', $p->category_id)->first();
@@ -31,12 +31,7 @@ class SearchController extends Controller
         }
         $output .= '</ul>';
       } else {
-        $output =
-          "<ul class='list-group position-absolute'>" .
-          "<li class='list-group-item'>" .
-          "Không tìm thấy bài viết" .
-          "</li>" .
-          "</ul>";
+        $output = "";
       }
     }
     return $output;
