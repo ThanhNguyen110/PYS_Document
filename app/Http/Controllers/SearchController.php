@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class SearchController extends Controller
 {
@@ -17,7 +16,7 @@ class SearchController extends Controller
       ->get();
 
     if ($request->ajax()) {
-      if (count($posts) > 0 && $keyword != null) {
+      if (count($posts) > 0 && !empty($keyword)) {
         $output = "<ul class='list-group d-block position-absolute'>";
         foreach ($posts as $p) {
           $subCategory = Category::where('id', $p->category_id)->first();
